@@ -120,12 +120,12 @@ module.exports = function (grunt) {
 		stonejs: {
 			xhr: {
 				options: {
-					stoneName: 'xhr',
+					stoneName: 'appRouter',
 					configFile: 'scripts/app.js',
 					baseDir: 'app/'
 				},
 				files: {
-					'.tmp/xhr.js': 'services/xhr.js'
+					'../dist/jsapp-router.js': 'services/app-router/f.js'
 				}
 			}			
 		},
