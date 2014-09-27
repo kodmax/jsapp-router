@@ -1,4 +1,6 @@
 (function (__this) {
+
+
 var appRouter = (function () {
 var __stone_modules = {};
 __stone_modules ['./pattern-regexp'] = (function () {
@@ -251,6 +253,16 @@ __stone_modules ['services/app-router/app-router'] = (function (HashMatcher, Nav
 			return this;
 		};
 	
+		/**
+		 * Simple wrapper for window.location.hash
+		 * @method app-router.AppRouter#navigate
+		 * @param {String} hash
+		 * @returns app-router.AppRouter
+		 */
+		this.navigate = function (hash) {
+			window.location.hash = hash;
+			return this;
+		};
 		
 		var navigator;
 		/**
@@ -299,12 +311,13 @@ __stone_modules ['appRouter'] = (function (AppRouter, module) {
 return __stone_modules ['appRouter'];
 })();
 
+
 if (typeof define === 'function' && define['amd']) {   
     define([], function () {
-    	return appRouter;
+        return appRouter;
     });
     
 } else {
-	__this.appRouter = appRouter;
+    __this.appRouter = appRouter;
 }
 })(this);
