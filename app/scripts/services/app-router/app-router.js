@@ -50,6 +50,16 @@ define(['./hash-matcher', './navigator', './controller-driver', './standard-not-
 			return this;
 		};
 	
+		/**
+		 * Simple wrapper for window.location.hash
+		 * @method app-router.AppRouter#navigate
+		 * @param {String} hash
+		 * @returns app-router.AppRouter
+		 */
+		this.navigate = function (hash) {
+			window.location.hash = hash;
+			return this;
+		};
 		
 		var navigator;
 		/**
