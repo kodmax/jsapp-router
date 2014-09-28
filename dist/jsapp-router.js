@@ -1,6 +1,4 @@
 (function (__this) {
-
-
 var appRouter = (function () {
 var __stone_modules = {};
 __stone_modules ['./pattern-regexp'] = (function () {
@@ -88,7 +86,7 @@ __stone_modules ['./navigator'] = (function () {
 				}
 				
 				context = contexts [stateId] = promise.create(hash);
-				history.replaceState({ 'state-id': stateId });
+				history.replaceState({ 'state-id': stateId }, document.title);
 			}
 			
 			if (previousContext) {
@@ -310,7 +308,6 @@ __stone_modules ['appRouter'] = (function (AppRouter, module) {
 })(__stone_modules ['services/app-router/app-router'], {config: function () { return {}; }});
 return __stone_modules ['appRouter'];
 })();
-
 
 if (typeof define === 'function' && define['amd']) {   
     define([], function () {
