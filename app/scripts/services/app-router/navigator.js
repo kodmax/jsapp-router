@@ -38,7 +38,7 @@ define([], function() {
 				}
 				
 				context = contexts [stateId] = promise.create(hash);
-				history.replaceState({ 'state-id': stateId });
+				history.replaceState({ 'state-id': stateId }, document.title);
 			}
 			
 			if (previousContext) {
