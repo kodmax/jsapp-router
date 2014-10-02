@@ -34,3 +34,7 @@ require(['app-router'], function (appRouter) {
     });
 });
 ```
+# Getting full documentation
+```shell
+grunt jsdoc
+```
