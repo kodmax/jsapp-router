@@ -63,7 +63,7 @@ define(['./hash-matcher', './navigator', './controller-driver', './standard-not-
 	
 		/**
 		 * Change address bar hash without triggering a route
-		 * @method app-router.changeHash
+		 * @method app-router.AppRouter#changeHash
 		 * @param {String} hash
 		 * @returns app-router.AppRouter
 		 */
@@ -78,7 +78,7 @@ define(['./hash-matcher', './navigator', './controller-driver', './standard-not-
 		/**
 		 * Preloads a route without navigating to it.
 		 * Preloaded route will get a 'navin' event if it is navigated to or 'dispose' if the next navigation goes elsewhere.
-		 * @method app-router.preload
+		 * @method app-router.AppRouter#preload
 		 * @param {String} hash
 		 * @returns app-router.AppRouter
 		 * 

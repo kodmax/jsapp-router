@@ -38,7 +38,9 @@ require.config({
 require(['dom-templates', 'app-router', 'jquery', 'dom-node'], function (tpl, appRouter, $, dom) {
 	document.body.removeChild(document.getElementsByTagName('app-loader')[0]);
 	tpl('app-bar', { parent: document.body });
-	var box = dom('div', { parent: document.body });
+	
+	var cards = tpl('app-cards', { parent: document.body });
+	var box = cards.getNodeByName('card-box');
 	
 	appRouter.addController('', function () {
 		var homeCard = tpl('app-card', { parent: box });
@@ -71,12 +73,12 @@ require(['dom-templates', 'app-router', 'jquery', 'dom-node'], function (tpl, ap
 		
 		return {
 			navin: function () {
-				$(homeCard.getRootNode()).addClass('active');
+				$(homeCard.getRootNode()).addClass('app-card--active');
 				log('navin');
 			},
 			
 			navout: function () {
-				$(homeCard.getRootNode()).removeClass('active');
+				$(homeCard.getRootNode()).removeClass('app-card--active');
 				log('navout');
 			},
 			

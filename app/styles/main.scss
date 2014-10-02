@@ -6,10 +6,4 @@
 @import "appbar";
 @import "apploader";
 
-app-card {
-    display: none;
-    
-    &.active {
-        display: block;
-    }
-}
+@import "card";

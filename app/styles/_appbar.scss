@@ -3,11 +3,9 @@
 
 $appbar-background-color: rgba(83, 83, 83, 0.97);
 $appbar-idle-background-color: rgba(83, 83, 83, 0.3);
-$appbar-height: 3.5em;
 
 body {
 	position: relative;
-	padding-top: $appbar-height;
 }
 
 app-bar {
