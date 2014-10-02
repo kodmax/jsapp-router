@@ -14,7 +14,6 @@ require.config({
 		'backbone.no-global': '.no-global/backbone',
 		'dom-node': 'services/dom-node/dom-node',
 		'app-router': 'services/app-router/f',
-		'translate': 'services/translate/t',
 		'exception': 'lib/exception',
 		'each': 'lib/each'
 	},
