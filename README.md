@@ -32,6 +32,8 @@ require(['app-router'], function (appRouter) {
             }
         };
     });
+    
+    appRouter.start();
 });
 ```
 # Getting full documentation
