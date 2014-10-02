@@ -60,6 +60,46 @@ define(['./hash-matcher', './navigator', './controller-driver', './standard-not-
 			window.location.hash = hash;
 			return this;
 		};
+	
+		/**
+		 * Change address bar hash without triggering a route
+		 * @method app-router.changeHash
+		 * @param {String} hash
+		 * @returns app-router.AppRouter
+		 */
+		this.changeHash = function (hash) {
+			history.pushState(history.state, document.title, '#' + hash.replace(/^#/, ''));
+			return this;
+		};
+		
+		
+		var preloaded;
+		
+		/**
+		 * Preloads a route without navigating to it.
+		 * Preloaded route will get a 'navin' event if it is navigated to or 'dispose' if the next navigation goes elsewhere.
+		 * @method app-router.preload
+		 * @param {String} hash
+		 * @returns app-router.AppRouter
+		 * 
+		 */
+		this.preload = function (hash) {
+			if (preloaded) {
+				preloaded.driver.dispose();
+			}
+			preloaded = { driver: createDriver(hash), hash: hash };
+			return this;
+		};
+
+		var createDriver = function (hash) {
+			var match = hashMatcher.match(hash);
+			if (match) {
+				return new ControllerDriver(hash, match.controller, match.params, match.options);
+				
+			} else {
+				return new ControllerDriver(hash, standardNotFoundController);
+			}			
+		};
 		
 		var navigator;
 		/**
@@ -71,13 +111,19 @@ define(['./hash-matcher', './navigator', './controller-driver', './standard-not-
 				navigator = new Navigator({
 					
 					create: function (hash) {
-						var match = hashMatcher.match(hash);
-						if (match) {
-							return new ControllerDriver(hash, match.controller, match.params, match.options);
-							
-						} else {
-							return new ControllerDriver(hash, standardNotFoundController);
-						}
+						if (preloaded) {
+							if (preloaded.hash == hash) {
+								var driver = preloaded.driver;
+								preloaded = undefined;
+								return driver;
+								
+							} else {
+								preloaded.driver.dispose();
+								preloaded = undefined;
+							}
+						} 
+						
+						return createDriver(hash);
 					},
 					
 					navin: function (driver) {

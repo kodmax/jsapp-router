@@ -15,7 +15,8 @@ require.config({
 		'dom-node': 'services/dom-node/dom-node',
 		'app-router': 'services/app-router/f',
 		'translate': 'services/translate/t',
-		'exception': 'lib/exception'		
+		'exception': 'lib/exception',
+		'each': 'lib/each'
 	},
 	
 	map: {
@@ -34,11 +35,10 @@ require.config({
 	}
 });
 
-require(['dom-templates', 'app-router', 'jquery'], function (tpl, appRouter, $) {
+require(['dom-templates', 'app-router', 'jquery', 'dom-node'], function (tpl, appRouter, $, dom) {
 	document.body.removeChild(document.getElementsByTagName('app-loader')[0]);
 	tpl('app-bar', { parent: document.body });
-	
-	var box = document.body;
+	var box = dom('div', { parent: document.body });
 	
 	appRouter.addController('', function () {
 		var homeCard = tpl('app-card', { parent: box });
@@ -60,45 +60,33 @@ require(['dom-templates', 'app-router', 'jquery'], function (tpl, appRouter, $) 
 		};
 	});
 	
-	appRouter.addController('category/:id', function (id) {
+	appRouter.addController(':hash', function (hash) {
 		var homeCard = tpl('app-card', { parent: box });
-		homeCard.getNodeByName('content').innerHTML = 'I\'m a category ' + id + ' card! :)';
-		$(homeCard.getRootNode()).hide();
+		
+		var log = function (msg) {
+			homeCard.getNodeByName('log').innerHTML += msg + '<br />';
+		};
+		
+		log('created #' + hash);
 		
 		return {
 			navin: function () {
-				$(homeCard.getRootNode()).show();
+				$(homeCard.getRootNode()).addClass('active');
+				log('navin');
 			},
 			
 			navout: function () {
-				$(homeCard.getRootNode()).hide();
+				$(homeCard.getRootNode()).removeClass('active');
+				log('navout');
 			},
 			
 			dispose: function () {
 				box.removeChild(homeCard.getRootNode());
+				log('dispose');
 			}
 		};
 	});
 	
-	appRouter.addController('product/:id', function (id) {
-		var homeCard = tpl('app-card', { parent: box });
-		homeCard.getNodeByName('content').innerHTML = 'I\'m a product ' + id + ' card! :)';
-		$(homeCard.getRootNode()).hide();
-		
-		return {
-			navin: function () {
-				$(homeCard.getRootNode()).show();
-			},
-			
-			navout: function () {
-				$(homeCard.getRootNode()).hide();
-			},
-			
-			dispose: function () {
-				box.removeChild(homeCard.getRootNode());
-			}
-		};
-	});
 	
 	appRouter.start();
 });

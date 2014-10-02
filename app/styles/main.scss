@@ -5,3 +5,11 @@
 @import "text";
 @import "appbar";
 @import "apploader";
+
+app-card {
+    display: none;
+    
+    &.active {
+        display: block;
+    }
+}
