@@ -6,29 +6,21 @@ Route preloading is possible for quick and fancy navigation like swipe gestures.
 
 example "match all" route
 ```js
-    appRouter.addController(':hash', function (hash) {
-        var homeCard = tpl('app-card', { parent: box });
+    appRouter.addController('foo/:id', function (id) {
         
-        var log = function (msg) {
-            homeCard.getNodeByName('log').innerHTML += msg + '<br />';
-        };
-        
-        log('created #' + hash);
+        // create the view here
         
         return {
             navin: function () {
-                $(homeCard.getRootNode()).addClass('app-card--active');
-                log('navin');
+                // show the view
             },
             
             navout: function () {
-                $(homeCard.getRootNode()).removeClass('app-card--active');
-                log('navout');
+                // hide the view
             },
             
             dispose: function () {
-                box.removeChild(homeCard.getRootNode());
-                log('dispose');
+                // dispose the view
             }
         };
     });
